@@ -1,4 +1,4 @@
-package com.algaworks.projeto;
+package com.algaworks.wine;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,7 @@ import br.com.wine.WineApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WineApplication.class)
 @WebAppConfiguration
-public class SpringBootTemplateProjetoApplicationTests {
+public class WineApplicationTests {
 
 	@Test
 	public void contextLoads() {

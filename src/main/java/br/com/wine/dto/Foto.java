@@ -1,18 +1,19 @@
 package br.com.wine.dto;
 
 public class Foto {
-	private String nome;
-	
-	Foto(String nome){
-		this.nome = nome;
+
+	private String url;
+
+	public Foto(String url) {
+		this.url = url;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setUrl(String url) {
+		this.url = url;
 	}
-	
+
 }

@@ -1,6 +1,5 @@
 package br.com.wine.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -11,16 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.NumberFormat;
+import org.springframework.util.StringUtils;
 
 @Entity
 @Table(name = "vinho")
-public class Vinho implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class Vinho {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,13 +31,14 @@ public class Vinho implements Serializable {
 	
 	@NotNull(message = "Safra é obrigatória")
 	private Integer safra;
-
+	
 	@NotNull(message = "Volume é obrigatório")
 	private Integer volume;
 	
 	@NotNull(message = "Valor é obrigatório")
-	@NumberFormat(pattern = "#,##00.0")
 	private BigDecimal valor;
+	
+	private String foto;
 	
 	public Long getCodigo() {
 		return codigo;
@@ -91,6 +88,18 @@ public class Vinho implements Serializable {
 		this.valor = valor;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
+	public boolean temFoto() {
+		return !StringUtils.isEmpty(foto);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,6 +124,5 @@ public class Vinho implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }

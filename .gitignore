@@ -1,11 +1,1 @@
-.DS_Store
-Servers/*
-.metadata
-.settings
-.classpath
-.project
-target/
-bin/
-rebel.xml
-.mvn*
-mvnw*
+/target/

@@ -1,12 +1,9 @@
 package br.com.wine.repository;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.data.repository.CrudRepository;
 import br.com.wine.model.Vinho;
 
-public interface Vinhos extends JpaRepository<Vinho, Long>{
+public interface Vinhos extends CrudRepository<Vinho, Long> {
 
-	public List<Vinho> findByNomeContaining(String nome);
+	public Iterable<Vinho> findByNomeContaining(String nome);
 }

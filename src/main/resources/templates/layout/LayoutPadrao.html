@@ -8,11 +8,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-	<title>Wine Vinhos</title>
+	<title>Spring e Layout Atacama</title>
 
 	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
 	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/wine.css}"/>
 	
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,6 +23,8 @@
 	<![endif]-->
 </head>
 <body>
+<input type="hidden" name="_csrf_header" th:value="${_csrf.headerName}"/>
+<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 
 <div class="aw-layout-page">
 	
@@ -30,7 +33,7 @@
 
 	    <div class="navbar-header">
 	      <a class="navbar-brand  hidden-xs" href="#">
-	        <img alt="Impacta" th:src="@{/layout/images/wine.png}"/>
+	        <img alt="AlgaWorks" th:src="@{/images/wine.png}"/>
 	      </a>
 
 	      <ul class="nav  navbar-nav">
@@ -41,44 +44,12 @@
 	    </div>
 
 	    <ul class="nav navbar-nav  navbar-right">
+	    	  <li>
+	    	  	<p class="navbar-text" th:text="${#authentication.name}"></p>
+	    	  </li>
 	    
 	      <li>
-	        <a href="#" class="js-search-modal-trigger-show"><i class="fa  fa-search"></i></a>
-	      </li>
-	      
-	      <li class="dropdown">
-	        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-	          <i class="fa  fa-envelope"></i> <span class="label  label-danger  aw-label-corner">48</span>
-	        </a>
-	                  
-	        <ul class="dropdown-menu">
-	          <li><a href="javascript:;">Item 1</a></li>
-	          <li><a href="javascript:;">Item 2</a></li>
-	        </ul>
-	      </li>
-	      
-	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	          <i class="fa  fa-user"></i>
-	        </a>
-	        
-	        <ul class="dropdown-menu">
-	          <li>
-	            <div class="aw-logged-user">
-	              <img src="https://api.adorable.io/avatars/80/joaodascouves" 
-	                width="80" height="80" alt="João das Couves" class="aw-logged-user__picture" />
-	              <span class="aw-logged-user__name">João das Couves</span>
-	            </div>
-	          </li>
-	          <li role="separator" class="divider"></li>
-	          <li><a href="#">Meu perfil</a></li>
-	          <li><a href="#">Alterar senha</a></li>
-	          <li><a href="#">Pagamentos</a></li>
-	        </ul>
-	      </li>
-	      
-	      <li>
-	        <a href="#"><em class="fa  fa-sign-out"></em></a>
+	        <a th:href="@{/logout}"><em class="fa  fa-sign-out"></em></a>
 	      </li> 
 	    </ul>
 
@@ -93,16 +64,16 @@
 	        		<li class="aw-menu__item">
           			<a th:href="@{/vinhos/novo}">
           				<i class="fa  fa-fw  fa-plus-circle"></i>
-          				<span>Novo produto</span>
+          				<span>Novo vinho</span>
           			</a>
 	        		</li>
 	        		
-	        		<li class="aw-menu__item">
+	        		<li class="aw-menu__item" sec:authorize-url="/vinhos">
           			<a th:href="@{/vinhos}">
           				<i class="fa  fa-fw  fa-search"></i>
-          				<span>Consulta produto</span>
+          				<span>Listagem vinhos</span>
           			</a>
-	        		</li>	
+	        		</li>
 	      	</ul>
 	    	</nav>
 		</div>
@@ -118,6 +89,8 @@
 </div>
 <script th:src="@{/layout/javascripts/vendors.min.js}"></script>
 <script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
+
 <th:block layout:fragment="javascript-extra"></th:block>
+
 </body>
 </html>
