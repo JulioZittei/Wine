@@ -1,11 +1,9 @@
 /* Upload - http://getuikit.com/docs/upload.html */
 .wn-upload {
 	padding: 15px;
-	
 	border: 1px dashed #ddd;
 	border-radius: 4px;
 	background: #fafafa;
-	
 	text-align: center;
 }
 
@@ -25,6 +23,5 @@
     width: 100%;
     opacity: 0;
     cursor: pointer;
-    
     font-size: 500px;
 }

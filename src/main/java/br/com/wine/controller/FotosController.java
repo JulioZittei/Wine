@@ -19,10 +19,9 @@ public class FotosController {
 	private VinhoService vinhoService;
 	
 	@RequestMapping(value = "/{codigo}", method = RequestMethod.POST)
-	public Foto upload(@PathVariable("codigo") Long codigo
-			, @RequestParam("files[]") MultipartFile[] files) {
-
-		return new Foto(files[0].getOriginalFilename());
+	public Foto upload(@PathVariable("codigo") Long codigo, @RequestParam("files[]") MultipartFile[] files) {
+		String url = vinhoService.salvarFoto(codigo, files[0]);
+		return new Foto(url);
 	}
 	
 }

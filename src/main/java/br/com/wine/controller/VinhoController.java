@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +34,8 @@ public class VinhoController {
 
 	@RequestMapping
 	public ModelAndView todos(){
-		ModelAndView mv = new ModelAndView("ListagemVinhos");
-		return mv.addObject(vinhoService.todos());	
+		ModelAndView mv = new ModelAndView("/vinho/ListagemVinhos");
+		return mv.addObject("vinhos",vinhoService.todos());	
 	}
 	
 	@RequestMapping(value = "/novo")
@@ -59,7 +60,10 @@ public class VinhoController {
 	
 	@RequestMapping("/{codigo}")
 	public ModelAndView visualizar(@PathVariable("codigo") Vinho vinho){
-		ModelAndView mv = new ModelAndView("/vinho/VizualizacaoVinho");
+		ModelAndView mv = new ModelAndView("/vinho/VisualizacaoVinho");
+		if(vinho.temFoto()){
+			vinho.setUrl("http://localhost:9444/s3/wine/"+vinho.getFoto()+"?noAuth=true");
+		}
 		return mv.addObject(vinho);
 	}
 	

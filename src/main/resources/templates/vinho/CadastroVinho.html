@@ -47,7 +47,7 @@
 					<label for="tipo" class="control-label">Tipo</label>
 					<select id="tipo" class="form-control" th:field="*{tipo}">
 						<option value="">Selecione o tipo</option>
-						<option th:each="tipo : ${tipoVinhoLists}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
+						<option th:each="tipo : ${tipoVinhoList}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
 					</select>
 				</div>
 				

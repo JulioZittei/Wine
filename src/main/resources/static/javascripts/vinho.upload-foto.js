@@ -1,15 +1,20 @@
 
 $(function(){
+	var uploadDrop = $('#upload-drop');
+	var containerFoto = $('.js-container-foto');
+	
 		var settings = {
 			type: 'json',
 			filelimit: 1,
 			allow: '*.(jpg|jpeg|png)',
-			action: '/fotos/' + this.uploadDrop.data('codigo'),
-			complete: onUploadCompleto.bind(this), 
-			beforeSend: adicionarCsrfToken
+			action: '/fotos/' + uploadDrop.data('codigo'),
+			complete: function(foto){
+				uploadDrop.addClass('hidden');
+				containerFoto.prepend('<img src="'+foto.url+'" class="img-responsive" style="margin:auto;"/>');
+			}
 		};
 		
 		UIkit.uploadSelect($('#upload-select'), settings);
-		UIkit.uploadDrop(this.uploadDrop, settings);	
+		UIkit.uploadDrop(uploadDrop, settings);	
 });
 	

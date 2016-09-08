@@ -1,2 +1,1 @@
-ALTER TABLE vinho 
-  ADD foto VARCHAR(100);
+ALTER TABLE vinho ADD foto VARCHAR(100);

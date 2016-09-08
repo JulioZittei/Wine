@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.util.StringUtils;
 
 @Entity
@@ -36,10 +38,14 @@ public class Vinho {
 	private Integer volume;
 	
 	@NotNull(message = "Valor é obrigatório")
+	@NumberFormat(pattern = "##,#0.00")
 	private BigDecimal valor;
 	
 	private String foto;
 	
+	@Transient
+	private String url;
+
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -98,6 +104,14 @@ public class Vinho {
 	
 	public boolean temFoto() {
 		return !StringUtils.isEmpty(foto);
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override
