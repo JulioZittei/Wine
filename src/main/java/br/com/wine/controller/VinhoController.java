@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.wine.model.TipoVinho;
 import br.com.wine.model.Vinho;
 import br.com.wine.service.VinhoService;
+import br.com.wine.storage.FotoStorage;
+import br.com.wine.storage.FotoStorageS3;
 
 @Controller
 @RequestMapping("/vinhos")
@@ -26,6 +27,9 @@ public class VinhoController {
 	
 	@Autowired
 	private VinhoService vinhoService;
+	
+	@Autowired
+	private FotoStorage fotoStorage;
 	
 	@ModelAttribute
 	public List<TipoVinho> tipoVinhos(){
@@ -62,7 +66,7 @@ public class VinhoController {
 	public ModelAndView visualizar(@PathVariable("codigo") Vinho vinho){
 		ModelAndView mv = new ModelAndView("/vinho/VisualizacaoVinho");
 		if(vinho.temFoto()){
-			vinho.setUrl("http://localhost:9444/s3/wine/"+vinho.getFoto()+"?noAuth=true");
+			vinho.setUrl(fotoStorage.getUrl(vinho.getFoto()));
 		}
 		return mv.addObject(vinho);
 	}

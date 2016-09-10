@@ -33,7 +33,7 @@
 
 	    <div class="navbar-header">
 	      <a class="navbar-brand  hidden-xs" href="#">
-	        <img alt="AlgaWorks" th:src="@{/images/wine.png}"/>
+	        <img alt="AlgaWorks" th:src="@{/layout/images/wine.png}"/>
 	      </a>
 
 	      <ul class="nav  navbar-nav">
@@ -45,11 +45,11 @@
 
 	  	<ul class="nav navbar-nav  navbar-right">
 	    	  <li>
-	    	  	<p class="navbar-text">Julio Cesar Zittei Dutra</p>
+	    	  	<p class="navbar-text" th:text="${#authentication.name}">Usuário</p>
 	    	  </li>
 	    
 	      <li>
-	        <a th:href="@{#}"><em class="fa  fa-sign-out"></em></a>
+	        <a th:href="@{/logout}"><em class="fa  fa-sign-out"></em></a>
 	      </li> 
 	    </ul>
 
@@ -68,7 +68,7 @@
           			</a>
 	        		</li>
 	        		
-	        		<li class="aw-menu__item">
+	        		<li class="aw-menu__item" sec:authorize-url="/vinhos">
           			<a th:href="@{/vinhos}">
           				<i class="fa  fa-fw  fa-search"></i>
           				<span>Listagem vinhos</span>
