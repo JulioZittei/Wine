@@ -13,11 +13,13 @@
 				Por favor, faça o login.
 			</div>
 			
-			<div class="aw-simple-panel__message  is-error" th:if="${#bools.isTrue(param.error)}">
-				O usuário e/ou senha não conferem
-			</div>
+			
 			
 			<div class="aw-simple-panel__box">
+				<div class="aw-simple-panel__message  is-error" th:if="${#bools.isTrue(param.error)}">
+					O usuário e/ou senha não conferem
+				</div>
+			
 				<div class="form-group  has-feedback">
 					<input type="text" class="form-control  input-lg" placeholder="Seu usuário" 
 						autofocus="autofocus" name="username"/>

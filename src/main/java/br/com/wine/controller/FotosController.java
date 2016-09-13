@@ -33,4 +33,8 @@ public class FotosController {
 		return fotoReader.recuperar(nome);
 	}
 	
+	@RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE)
+	public void excluir(@PathVariable Long codigo){
+		vinhoService.excluirFoto(codigo);
+	}
 }

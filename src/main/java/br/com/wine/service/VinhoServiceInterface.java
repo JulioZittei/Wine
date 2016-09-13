@@ -17,4 +17,6 @@ public interface VinhoServiceInterface {
 	public void excluir(Long codigo);
 	
 	public String salvarFoto(Long codigo, MultipartFile foto);
+	
+	public void excluirFoto(Long codigo);
 }

@@ -22,7 +22,9 @@
 	<div class="container-fluid">
 		<div class="rol">
 			<div class="col-sm-9  js-container-foto">
-			<img th:src="${vinho.url}" th:if="${vinho.temFoto()}" class="img-responsive" style="margin:auto;"/>
+				<button type="button" id="remove-button" class="close" data-dismiss="alert" aria-label="Close" th:if="${vinho.temFoto()}"><span aria-hidden="true">&times;</span></button>
+				<img th:src="${vinho.url}" th:if="${vinho.temFoto()}" class="img-responsive" style="margin:auto;" th:attr="data-codigo=${vinho.codigo}"/>
+			
 				<div id="upload-drop" class="wn-upload" th:attr="data-codigo=${vinho.codigo}" th:if="${not vinho.temFoto()}">
 					<img th:src="@{/layout/images/mockup-garrafa.png}"/>
 					<div>

@@ -49,5 +49,12 @@ public class VinhoService implements VinhoServiceInterface {
 		
 		return fotoStorage.getUrl(nomeFoto);
 	}
+
+	@Override
+	public void excluirFoto(Long codigo) {
+		Vinho vinho  = vinhos.findOne(codigo);
+		vinho.setFoto(null);
+		vinhos.save(vinho);		
+	}
 	
 }
