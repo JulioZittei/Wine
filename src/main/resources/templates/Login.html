@@ -7,18 +7,18 @@
 <th:block layout:fragment="conteudo">
 	<form th:action="@{/login}" method="POST">
 		<div class="aw-simple-panel">
-			<img th:src="@{/layout/images/wine.png}"/>
+			<img th:src="@{/layout/images/wine.png}" style="background:#1875A5;padding:15px;border-radius:30%"/>
 			
 			<div class="aw-simple-panel__message" style="color:#fff;">
 				Por favor, faça o login.
 			</div>
 			
-			
-			
-			<div class="aw-simple-panel__box">
-				<div class="aw-simple-panel__message  is-error" th:if="${#bools.isTrue(param.error)}">
+			<div class="aw-simple-panel__message  is-error" th:if="${#bools.isTrue(param.error)}">
 					O usuário e/ou senha não conferem
-				</div>
+			</div>
+		
+			<div class="aw-simple-panel__box">
+				
 			
 				<div class="form-group  has-feedback">
 					<input type="text" class="form-control  input-lg" placeholder="Seu usuário" 

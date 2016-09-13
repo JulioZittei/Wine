@@ -34,7 +34,7 @@ public class FotosController {
 	}
 	
 	@RequestMapping(value = "/{codigo}", method = RequestMethod.DELETE)
-	public void excluir(@PathVariable Long codigo){
-		vinhoService.excluirFoto(codigo);
+	public Foto excluir(@PathVariable Long codigo){
+		return vinhoService.excluirFoto(codigo);
 	}
 }

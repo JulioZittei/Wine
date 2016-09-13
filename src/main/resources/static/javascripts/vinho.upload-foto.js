@@ -29,8 +29,8 @@ Wine.UploadFoto = (function() {
 	
 	function onUploadCompleto(foto) {
 		this.uploadDrop.addClass('hidden');
-		this.containerFoto.prepend('<img src="' + foto.url + '" class="img-responsive" style="margin: auto"/>'
-				+ '<button type="button" id="remove-button" class="close" data-dismiss="alert" aria-label="Close" th:if="${vinho.temFoto()}"><span aria-hidden="true">&times;</span></button>');
+		this.containerFoto.append('<img src="' + foto.url + '" class="img-responsive" style="margin: auto"/>');
+		$('.close#remove-button').removeClass('hidden');
 	}
 	
 	return UploadFoto;
@@ -42,16 +42,23 @@ var Winee = Winee || {};
 Winee.ExclusaoFoto = (function() { 
 	
 	function ExclusaoFoto() {
-		this.exclusao = $('#upload-drop');
-		this.foto = $('.img-responsive');
+		this.exclusao = $('.js-container-foto');
+		this.foto = $('#upload-drop');
 	}
 	
 	ExclusaoFoto.prototype.iniciar = function() {
 		var response = $.ajax({
 			type: 'DELETE',
 			url: '/fotos/' + this.foto.data('codigo'),
-			complete: onComplete.bind(this), 
 			beforeSend: adicionarCsrfToken
+		});
+		
+		response.done(function(data){
+			console.log($('#upload-drop').data('codigo') + " " + data.url);
+			$('.img-responsive').addClass('hidden');
+			$('#upload-drop').removeClass('hidden');
+			$('.js-container-foto').prepend('<img class="hidden" src="'+data.url+'"/>');
+			$('#remove-button').addClass('hidden');
 		});
 		
 	}
@@ -61,16 +68,7 @@ Winee.ExclusaoFoto = (function() {
 		var token = $('input[name=_csrf]').val();
 		xhr.setRequestHeader(header, token);
 	}
-	
-	function onComplete(foto) {
-		$('.img-responsive').addClass('hidden');
-		this.exclusao.prepend('<div id="upload-drop" class="wn-upload" th:attr="data-codigo=${vinho.codigo}" th:if="${not vinho.temFoto()}">'
-				+'<img th:src="@{/layout/images/mockup-garrafa.png}"/><div><span>Arraste a foto aqui ou </span>'+
-						'<a class="wn-upload-form-file"> selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/> </a>'
-					+'</div>'+
-				'</div>');
-		$('#remove-button').addClass('hidden');
-	}
+
 	
 	return ExclusaoFoto;
 	

@@ -3,14 +3,21 @@ package br.com.wine.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.wine.dto.Foto;
 import br.com.wine.model.Vinho;
 import br.com.wine.repository.Vinhos;
+import br.com.wine.storage.FotoRemove;
 import br.com.wine.storage.FotoStorage;
 
 @Service
+@Transactional(rollbackFor=Exception.class)
 public class VinhoService implements VinhoServiceInterface {
 
 	@Autowired
@@ -19,14 +26,18 @@ public class VinhoService implements VinhoServiceInterface {
 	@Autowired
 	private FotoStorage fotoStorage;
 	
+	@Autowired(required = false)
+	private FotoRemove fotoRemove;
+	
+	@Override
+	public Page<Vinho> todos(Integer page, Integer size) {
+		Pageable pageable = new PageRequest(page, size);
+		return vinhos.findAllByOrderByNomeDesc(pageable);
+	}
+	
 	@Override
 	public void salvar(Vinho vinho) {
 		this.vinhos.save(vinho);
-	}
-
-	@Override
-	public List<Vinho> todos() {
-		return vinhos.findAll();
 	}
 
 	@Override
@@ -51,10 +62,12 @@ public class VinhoService implements VinhoServiceInterface {
 	}
 
 	@Override
-	public void excluirFoto(Long codigo) {
+	public Foto excluirFoto(Long codigo) {
 		Vinho vinho  = vinhos.findOne(codigo);
+		String nomeFoto = vinho.getFoto();
 		vinho.setFoto(null);
-		vinhos.save(vinho);		
+		vinhos.save(vinho);	
+		return new Foto(fotoRemove.getUrlDelete(nomeFoto));
 	}
 	
 }

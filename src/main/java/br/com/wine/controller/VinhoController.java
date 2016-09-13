@@ -19,7 +19,6 @@ import br.com.wine.model.TipoVinho;
 import br.com.wine.model.Vinho;
 import br.com.wine.service.VinhoService;
 import br.com.wine.storage.FotoStorage;
-import br.com.wine.storage.FotoStorageS3;
 
 @Controller
 @RequestMapping("/vinhos")
@@ -37,9 +36,15 @@ public class VinhoController {
 	}
 
 	@RequestMapping
-	public ModelAndView todos(){
+	public ModelAndView todosDefault(){
 		ModelAndView mv = new ModelAndView("/vinho/ListagemVinhos");
-		return mv.addObject("vinhos",vinhoService.todos());	
+		return mv.addObject("vinhos",vinhoService.todos(0,10));	
+	}
+	
+	@RequestMapping("/page/{page}")
+	public ModelAndView todosPerPage(@PathVariable("page") Integer page){
+		ModelAndView mv = new ModelAndView("/vinho/ListagemVinhos");
+		return mv.addObject("vinhos",vinhoService.todos(page-1,10));	
 	}
 	
 	@RequestMapping(value = "/novo")

@@ -13,7 +13,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 
 @Profile("storage-s3")
 @Component
-public class FotoStorageS3 implements FotoStorage{
+public class FotoStorageS3 implements FotoStorage, FotoRemove{
 	
 	@Autowired
 	private AmazonS3 s3Client;
@@ -34,4 +34,10 @@ public class FotoStorageS3 implements FotoStorage{
 	public String getUrl(String nomeFoto){
 		return "http://localhost:9444/ui/wine/"+nomeFoto+"?noAuth=true";
 	}
+	
+	@Override
+	public String getUrlDelete(String nomeFoto) {
+		return "http://localhost:9444/ui/wine/"+nomeFoto+"/delete";
+	}
+	
 }
