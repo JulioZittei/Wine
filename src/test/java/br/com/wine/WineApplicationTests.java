@@ -1,4 +1,4 @@
-package com.algaworks.wine;
+package br.com.wine;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
