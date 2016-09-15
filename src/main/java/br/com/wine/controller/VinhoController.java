@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.wine.model.TipoVinho;
 import br.com.wine.model.Vinho;
+import br.com.wine.repository.search.PesquisaVinho;
 import br.com.wine.service.VinhoService;
 import br.com.wine.storage.FotoStorage;
 
@@ -36,15 +37,15 @@ public class VinhoController {
 	}
 
 	@RequestMapping
-	public ModelAndView todosDefault(){
+	public ModelAndView todosDefault(@ModelAttribute("pesquisa") PesquisaVinho pesquisa){
 		ModelAndView mv = new ModelAndView("/vinho/ListagemVinhos");
-		return mv.addObject("vinhos",vinhoService.todos(0,10));	
+		return mv.addObject("vinhos",vinhoService.pesquisaPorNome(pesquisa,0,1));	
 	}
 	
 	@RequestMapping("/page/{page}")
-	public ModelAndView todosPerPage(@PathVariable("page") Integer page){
+	public ModelAndView todosPerPage(@ModelAttribute("pesquisa") PesquisaVinho pesquisa, @PathVariable("page") Integer page){
 		ModelAndView mv = new ModelAndView("/vinho/ListagemVinhos");
-		return mv.addObject("vinhos",vinhoService.todos(page-1,10));	
+		return mv.addObject("vinhos",vinhoService.pesquisaPorNome(pesquisa,page-1,1));	
 	}
 	
 	@RequestMapping(value = "/novo")

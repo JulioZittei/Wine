@@ -1,7 +1,5 @@
 package br.com.wine.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.wine.dto.Foto;
 import br.com.wine.model.Vinho;
 import br.com.wine.repository.Vinhos;
+import br.com.wine.repository.search.PesquisaVinho;
 import br.com.wine.storage.FotoRemove;
 import br.com.wine.storage.FotoStorage;
 
@@ -41,11 +40,6 @@ public class VinhoService implements VinhoServiceInterface {
 	}
 
 	@Override
-	public List<Vinho> porNomeContendo(String nome) {
-		return vinhos.findByNomeContaining(nome);
-	}
-
-	@Override
 	public void excluir(Long codigo) {
 		vinhos.delete(codigo);		
 	}
@@ -69,5 +63,13 @@ public class VinhoService implements VinhoServiceInterface {
 		vinhos.save(vinho);	
 		return new Foto(fotoRemove.getUrlDelete(nomeFoto));
 	}
+
+	@Override
+	public Page<Vinho> pesquisaPorNome(PesquisaVinho pesquisaVinho, Integer page, Integer size) {
+		Pageable pageable = new PageRequest(page, size);
+		return vinhos.findByNomeContaining(pesquisaVinho.getNome() == null ? "" : pesquisaVinho.getNome() , pageable);
+	}
+	
+	
 	
 }
