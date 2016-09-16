@@ -39,13 +39,13 @@ public class VinhoController {
 	@RequestMapping
 	public ModelAndView todosDefault(@ModelAttribute("pesquisa") PesquisaVinho pesquisa){
 		ModelAndView mv = new ModelAndView("/vinho/ListagemVinhos");
-		return mv.addObject("vinhos",vinhoService.pesquisaPorNome(pesquisa,0,1));	
+		return mv.addObject("vinhos",vinhoService.pesquisaPorNome(pesquisa,0,10));	
 	}
 	
 	@RequestMapping("/page/{page}")
 	public ModelAndView todosPerPage(@ModelAttribute("pesquisa") PesquisaVinho pesquisa, @PathVariable("page") Integer page){
 		ModelAndView mv = new ModelAndView("/vinho/ListagemVinhos");
-		return mv.addObject("vinhos",vinhoService.pesquisaPorNome(pesquisa,page-1,1));	
+		return mv.addObject("vinhos",vinhoService.pesquisaPorNome(pesquisa,page-1,10));	
 	}
 	
 	@RequestMapping(value = "/novo")
