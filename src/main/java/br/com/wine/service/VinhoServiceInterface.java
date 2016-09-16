@@ -17,7 +17,5 @@ public interface VinhoServiceInterface {
 	
 	public Foto excluirFoto(Long codigo);
 	
-	public Page<Vinho> todos(Integer page, Integer size);
-	
 	public Page<Vinho> pesquisaPorNome(PesquisaVinho pesquisaVinho, Integer page, Integer size);
 }

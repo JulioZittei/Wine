@@ -29,12 +29,6 @@ public class VinhoService implements VinhoServiceInterface {
 	private FotoRemove fotoRemove;
 	
 	@Override
-	public Page<Vinho> todos(Integer page, Integer size) {
-		Pageable pageable = new PageRequest(page, size);
-		return vinhos.findAllByOrderByNomeDesc(pageable);
-	}
-	
-	@Override
 	public void salvar(Vinho vinho) {
 		this.vinhos.save(vinho);
 	}
@@ -69,7 +63,5 @@ public class VinhoService implements VinhoServiceInterface {
 		Pageable pageable = new PageRequest(page, size);
 		return vinhos.findByNomeContaining(pesquisaVinho.getNome() == null ? "" : pesquisaVinho.getNome() , pageable);
 	}
-	
-	
 	
 }

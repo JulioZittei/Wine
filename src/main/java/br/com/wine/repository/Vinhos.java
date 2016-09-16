@@ -9,5 +9,4 @@ public interface Vinhos extends JpaRepository<Vinho, Long> {
 
 	public Page<Vinho> findByNomeContaining(String nome, Pageable pageable);
 	
-	public Page<Vinho> findAllByOrderByNomeDesc(Pageable pageable);
 }
